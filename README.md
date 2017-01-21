@@ -9,9 +9,8 @@ wiki](https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim)
 
 ## Requirements
 
-- python2 in your `$PATH`
+- python2 in your `$PATH`, with virtualenv installed
 - python3 in your `$PATH`
-- virtualenv installed for python2 and python3
 
 ## Usage
 

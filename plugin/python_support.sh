@@ -7,7 +7,7 @@ set -x
 
 echo 'initializing python3 virtualenv for neovim'
 
-python3 -m virtualenv nvim_py3
+python3 -m venv nvim_py3
 . nvim_py3/bin/activate
 pip install neovim
 pip install flake8
