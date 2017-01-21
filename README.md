@@ -4,7 +4,7 @@
 use a single command `:PythonSupportInit` to initialize python support for
 neovim.
 
-If you like setup python for neovim manually, you could refer to [this
+If you like setup python for neovim manually, you may refer to [this
 wiki](https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim)
 
 ## Requirements
