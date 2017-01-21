@@ -19,6 +19,6 @@ execute `:PythonSupportInit` after you have installed this plugin.
 
 ## Notice
 
-I'm working on linux systems. I haven't test it on other systems. Feel free to
-send a PR for other systems support.
+I'm working on linux. I haven't test it on other systems. Feel free to send a
+PR for other systems support.
 
