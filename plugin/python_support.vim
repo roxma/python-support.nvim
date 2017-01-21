@@ -22,9 +22,13 @@ func! s:init()
 	let l:python3 = glob(s:dir . '/nvim_py3/bin/python')
 	if l:python2 != ''
 		let g:python_host_prog = l:python2
+	else
+		echom 'python2 not provided by python-support.nvim. Please execute PythonSupportInit'
 	endif
 	if l:python3 != ''
 		let g:python3_host_prog = l:python3
+	else
+		echom 'python3 not provided by python-support.nvim. Please execute PythonSupportInit'
 	endif
 endfunc
 
