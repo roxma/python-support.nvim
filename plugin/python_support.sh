@@ -7,6 +7,7 @@ set -x
 
 echo 'initializing python3 virtualenv for neovim'
 
+rm -rf nvim_py3
 python3 -m venv nvim_py3
 . nvim_py3/bin/activate
 pip install neovim
@@ -15,6 +16,7 @@ deactivate
 
 echo 'initializing python2 virtualenv for neovim'
 
+rm -rf nvim_py2
 python2 -m virtualenv nvim_py2
 . nvim_py2/bin/activate
 pip install neovim
