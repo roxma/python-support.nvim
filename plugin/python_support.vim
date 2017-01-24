@@ -7,19 +7,18 @@ endif
 
 com! PythonSupportInit call s:python_support_init()
 
-let s:dir = expand('<sfile>:p:h')
-
 func! s:python_support_init()
 	split
 	enew
-	call termopen('/bin/sh ' . s:dir . '/' . 'python_support.sh')
+	call termopen('/bin/sh ' .  globpath(&rtp,'autoload/python_support.sh'))
 	startinsert
 	autocmd termclose  <buffer>  call s:init()
 endfunc
 
 func! s:init()
-	let l:python2 = glob(s:dir . '/nvim_py2/bin/python')
-	let l:python3 = glob(s:dir . '/nvim_py3/bin/python')
+	
+	let l:python2 = globpath(&rtp,'autoload/nvim_py2/bin/python')
+	let l:python3 = globpath(&rtp,'autoload/nvim_py3/bin/python')
 	if l:python2 != ''
 		let g:python_host_prog = l:python2
 	else
