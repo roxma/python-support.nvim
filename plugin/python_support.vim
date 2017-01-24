@@ -9,8 +9,8 @@ let s:python3_require = get(g:,'python_support_python3_require',1)
 
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'neovim')
 let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'neovim')
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'flake8')
-let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'flake8')
+" let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'flake8')
+" let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'flake8')
 
 com! PythonSupportInitPython2 call s:python_support_init(2)
 com! PythonSupportInitPython3 call s:python_support_init(3)
