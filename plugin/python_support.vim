@@ -7,8 +7,8 @@ endif
 let s:python2_require = get(g:,'python_support_python2_require',1)
 let s:python3_require = get(g:,'python_support_python3_require',1)
 
-let s:python3_requirements = get(g:,'python_support_python3_requirements',[])
-let s:python2_requirements = get(g:,'python_support_python2_requirements',[])
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'neovim')
+let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'neovim')
 
 com! PythonSupportInitPython2 call s:python_support_init(2)
 com! PythonSupportInitPython3 call s:python_support_init(3)
@@ -32,14 +32,42 @@ func! s:init()
 	endtry
 	if l:python2 != ''
 		let g:python_host_prog = l:python2
+		" span pyhton process to check requirements 1 second later
+		call timer_start(1000,function('s:py2requirements'))
 	elseif s:python2_require
 		echom 'python2 not provided by python-support.nvim. Please execute PythonSupportInitPython2'
 	endif
+
 	if l:python3 != ''
 		let g:python3_host_prog = l:python3
+		" span pyhton process to check requirements 1 second later
+		call timer_start(1000,function('s:py3requirements'))
 	elseif s:python3_require
 		echom 'python3 not provided by python-support.nvim. Please execute PythonSupportInitPython3'
 	endif
+
+endfunc
+
+func! s:py2requirements()
+	if empty(g:python_support_python2_requirements)
+		" no requirements
+		return
+	endif
+	let l:cmd = [g:python_host_prog, split(globpath(&rtp,'autoload/python2_check.py'),'\n')[0]] + g:python_support_python2_requirements
+	call jobstart(l:cmd,{'on_stdout':function('s:on_stdout'), 'on_stderr':function('s:on_stdout')})
+endfunc
+
+func! s:py3requirements()
+	if empty(g:python_support_python3_requirements)
+		" no requirements
+		return
+	endif
+	let l:cmd = [g:python3_host_prog, split(globpath(&rtp,'autoload/python3_check.py'),'\n')[0]] + g:python_support_python3_requirements
+	call jobstart(l:cmd,{'on_stdout':function('s:on_stdout'), 'on_stderr':function('s:on_stdout')})
+endfunc
+
+func! s:on_stdout(job_id, data, event)
+	echom join(a:data,"\n")
 endfunc
 
 call s:init()
