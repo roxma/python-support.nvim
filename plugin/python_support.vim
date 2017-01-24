@@ -9,6 +9,8 @@ let s:python3_require = get(g:,'python_support_python3_require',1)
 
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'neovim')
 let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'neovim')
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'flake8')
+let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'flake8')
 
 com! PythonSupportInitPython2 call s:python_support_init(2)
 com! PythonSupportInitPython3 call s:python_support_init(3)
@@ -16,7 +18,11 @@ com! PythonSupportInitPython3 call s:python_support_init(3)
 func! s:python_support_init(v)
 	split
 	enew
-	call termopen('/bin/sh ' .  split(globpath(&rtp,'autoload/python'.a:v.'_support.sh'),'\n')[0])
+	if a:v==2
+		call termopen(['/bin/sh', split(globpath(&rtp,'autoload/python2_support.sh'),'\n')[0]] + g:python_support_python2_requirements)
+	else
+		call termopen(['/bin/sh', split(globpath(&rtp,'autoload/python3_support.sh'),'\n')[0]] + g:python_support_python3_requirements)
+	endif
 	startinsert
 	autocmd termclose  <buffer>  call s:init()
 endfunc

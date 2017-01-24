@@ -10,8 +10,7 @@ echo 'initializing python3 virtualenv for neovim'
 rm -rf nvim_py3
 python3 -m venv nvim_py3
 . nvim_py3/bin/activate
-pip install neovim
-pip install flake8
+pip install "$@"
 deactivate
 
 echo 'init finished'
