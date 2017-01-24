@@ -1,16 +1,16 @@
 
 # python-support.nvim
 
-use a single command `:PythonSupportInit` to initialize python support for
-neovim.
+use `:PythonSupportInitPython2` and `:PythonSupportInitPython3` to initialize
+python support for neovim.
 
 If you like setup python for neovim manually, you may refer to [this
 wiki](https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim)
 
 ## Requirements
 
-- python2 in your `$PATH`, with virtualenv installed
-- python3 in your `$PATH`
+- For python2 support, you need python2 in your `$PATH`, with virtualenv installed
+- For python2 support, you need python3 in your `$PATH`
 
 ## Usage
 
