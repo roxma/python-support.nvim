@@ -31,11 +31,10 @@ func! s:init()
 	
 	let l:python2 = ""
 	let l:python3 = ""
-	try
-		let l:python2 = split(globpath(&rtp,'autoload/nvim_py2/bin/python'),'\n')[0]
-		let l:python3 = split(globpath(&rtp,'autoload/nvim_py3/bin/python'),'\n')[0]
-	catch
-	endtry
+
+	silent! let l:python2 = split(globpath(&rtp,'autoload/nvim_py2/bin/python'),'\n')[0]
+	silent! let l:python3 = split(globpath(&rtp,'autoload/nvim_py3/bin/python'),'\n')[0]
+
 	if l:python2 != ''
 		let g:python_host_prog = l:python2
 		" span pyhton process to check requirements 1 second later
