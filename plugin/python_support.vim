@@ -28,7 +28,7 @@ func! s:python_support_init(v)
 endfunc
 
 func! s:init()
-	
+
 	let l:python2 = ""
 	let l:python3 = ""
 
@@ -37,7 +37,7 @@ func! s:init()
 
 	if l:python2 != ''
 		let g:python_host_prog = l:python2
-		" span pyhton process to check requirements 1 second later
+		" spawn python process to check requirements 1 second later
 		call timer_start(1000,function('s:py2requirements'))
 	elseif s:python2_require
 		echom 'python2 not provided by python-support.nvim. Please execute PythonSupportInitPython2'
@@ -45,7 +45,7 @@ func! s:init()
 
 	if l:python3 != ''
 		let g:python3_host_prog = l:python3
-		" span pyhton process to check requirements 1 second later
+		" spawn python process to check requirements 1 second later
 		call timer_start(1000,function('s:py3requirements'))
 	elseif s:python3_require
 		echom 'python3 not provided by python-support.nvim. Please execute PythonSupportInitPython3'
