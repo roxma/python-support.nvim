@@ -12,9 +12,6 @@ let g:python_support_python2_requirements = add(get(g:,'python_support_python2_r
 " let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'flake8')
 " let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'flake8')
 
-com! PythonSupportInitPython2 call s:python_support_init(2)
-com! PythonSupportInitPython3 call s:python_support_init(3)
-
 func! s:python_support_init(v)
 	split
 	enew
@@ -28,6 +25,8 @@ func! s:python_support_init(v)
 endfunc
 
 func! s:init()
+	com! PythonSupportInitPython2 call s:python_support_init(2)
+	com! PythonSupportInitPython3 call s:python_support_init(3)
 
 	let l:python2 = ""
 	let l:python3 = ""
