@@ -11,6 +11,7 @@ wiki](https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim)
 
 - For python2 support, you need python2 in your `$PATH`, with virtualenv installed
 - For python3 support, you need python3 in your `$PATH`
+- If Neovim is started in an active virtualenv, the Python version (and its requirements list, see below) are resolved dynamically, and the requirements installed.
 
 ## Usage
 
@@ -35,6 +36,13 @@ message will be fired by this plugin. It should be fixed after you execute
 ```vim
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'flake8')
 let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'flake8')
+```
+
+Alternatively
+
+```vim
+let s:py_reqs = ['jedi', 'flake8', 'isort', 'flake8-isort']
+let g:python_support_python3_requirements = extend(get(g:, 'python_support_python3_requirements', []), s:py_reqs)
 ```
 
 ## Notice
