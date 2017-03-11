@@ -59,7 +59,7 @@ endfunc
 func! s:init()
 
 	let l:in_venv = s:check_in_venv()
-	if l:in_venv
+	if l:in_venv && (s:python2_require || s:python3_require)
 		let l:version = s:get_py_version()
 		call s:setup_venv(l:version)
 		return
