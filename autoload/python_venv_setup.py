@@ -13,7 +13,7 @@ try:
 except (DistributionNotFound, VersionConflict):
     import pip
 
-    args = ['install', '-v'] + dependencies
+    args = ['install', '-U', '-v'] + dependencies
 
     # Use 123 to tell neovim that a restart is needed, otherwise signal an error
     retval = pip.main(initial_args=args) or 123
