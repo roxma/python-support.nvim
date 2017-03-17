@@ -1,9 +1,9 @@
 #!/bin/bash
 
-cd $(dirname "${BASH_SOURCE[0]}")
-
 set -e
 set -x
+
+cd $(dirname "${BASH_SOURCE[0]}")
 
 echo 'initializing python3 virtualenv for neovim'
 
