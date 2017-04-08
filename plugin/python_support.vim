@@ -53,7 +53,7 @@ func! s:init()
 
 endfunc
 
-func! s:py2requirements()
+func! s:py2requirements(timer)
 	if empty(g:python_support_python2_requirements)
 		" no requirements
 		return
@@ -62,7 +62,7 @@ func! s:py2requirements()
 	call jobstart(l:cmd,{'on_stdout':function('s:on_stdout'), 'on_stderr':function('s:on_stdout')})
 endfunc
 
-func! s:py3requirements()
+func! s:py3requirements(timer)
 	if empty(g:python_support_python3_requirements)
 		" no requirements
 		return
