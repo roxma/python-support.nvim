@@ -36,8 +36,8 @@ let g:python_support_python3_requirements = add(get(g:,'python_support_python3_r
 let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'flake8')
 ```
 
-This plugin sets virtualenv for neovim by default. If you want to use the
-global python2 and python3, use these options:
+This plugin sets virtualenv for neovim by default. If you want to use current
+environment's python2 and python3, use these options:
 
 ```vim
 let g:python_support_python2_venv = 0
