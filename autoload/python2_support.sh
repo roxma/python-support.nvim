@@ -17,6 +17,9 @@ then
     python2 -m virtualenv nvim_py2
     . nvim_py2/bin/activate
     pip install "$@"
+elif [ -n "$VIRTUAL_ENV" -a -f "$VIRTUAL_ENV/bin/python2" ]
+then
+    python2 -m pip install "$@"
 else
     python2 -m pip install --user "$@"
 fi
