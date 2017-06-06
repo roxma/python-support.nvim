@@ -50,7 +50,7 @@ func! s:init()
         endif
 
         if get(g:, 'python_host_prog', '') != ''
-            " span pyhton process to check requirements 1 second later
+            " spawn pyhton process to check requirements 1 second later
             call timer_start(1000,function('s:py2requirements'))
         endif
     endif
@@ -70,7 +70,7 @@ func! s:init()
         endif
 
         if get(g:, 'python3_host_prog', '') != ''
-            " span pyhton process to check requirements 1 second later
+            " spawn pyhton process to check requirements 1 second later
             call timer_start(1000,function('s:py3requirements'))
         endif
     endif
