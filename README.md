@@ -9,16 +9,17 @@ wiki](https://github.com/zchee/deoplete-jedi/wiki/Setting-up-Python-for-Neovim)
 
 ## Requirements
 
-- For python2 support, you need python2 in your `$PATH`, with virtualenv installed
-- For python3 support, you need python3 in your `$PATH`
+- For python2 support, you need `python2` in your `$PATH`, with virtualenv
+  installed
+- For python3 support, you need `python3` in your `$PATH`
 
 ## Usage
 
-execute `:PythonSupportInitPython2` and `:PythonSupportInitPython3`  after you
+Execute `:PythonSupportInitPython2` and `:PythonSupportInitPython3`  after you
 have installed this plugin.
 
-This plugin automatically check python2 and python2 env for neovim. If you
-don't need python2 or python3, use this to disable checking:
+This plugin automatically checks python2 and python3 dependencies for neovim.
+If you don't need python2 or python3, use this to disable checking:
 
 ```vim
 let g:python_support_python2_require = 0
