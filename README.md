@@ -38,7 +38,9 @@ let g:python_support_python2_requirements = add(get(g:,'python_support_python2_r
 ```
 
 This plugin sets virtualenv for neovim by default. If you want to use current
-environment's python2 and python3, use these options:
+environment's python2 and python3, for example, the jedi library won't
+complete for non-venv project if the plugin is running on venv. Use these
+options to disable this feature:
 
 ```vim
 let g:python_support_python2_venv = 0
