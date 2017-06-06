@@ -7,6 +7,9 @@ endif
 let s:python2_require = get(g:,'python_support_python2_require',1)
 let s:python3_require = get(g:,'python_support_python3_require',1)
 
+let g:python_support_python2_venv = get(g:,'python_support_python2_venv', 1)
+let g:python_support_python3_venv = get(g:,'python_support_python3_venv', 1)
+
 let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'neovim')
 let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'neovim')
 " let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'flake8')
@@ -19,37 +22,58 @@ func! s:python_support_init(v)
 	split
 	enew
 	if a:v==2
-		call termopen([split(globpath(&rtp,'autoload/python2_support.sh'),'\n')[0]] + g:python_support_python2_requirements)
+		call termopen([split(globpath(&rtp,'autoload/python2_support.sh'),'\n')[0]] + [g:python_support_python2_venv] + g:python_support_python2_requirements)
 	else
-		call termopen([split(globpath(&rtp,'autoload/python3_support.sh'),'\n')[0]] + g:python_support_python3_requirements)
+		call termopen([split(globpath(&rtp,'autoload/python3_support.sh'),'\n')[0]] + [g:python_support_python3_venv] + g:python_support_python3_requirements)
 	endif
 	startinsert
 	autocmd termclose  <buffer>  call s:init()
 endfunc
 
 func! s:init()
-	
+
 	let l:python2 = ""
 	let l:python3 = ""
 
-	silent! let l:python2 = split(globpath(&rtp,'autoload/nvim_py2/bin/python'),'\n')[0]
-	silent! let l:python3 = split(globpath(&rtp,'autoload/nvim_py3/bin/python'),'\n')[0]
+    if s:python2_require
+        if g:python_support_python2_venv
+            silent! let l:python2 = split(globpath(&rtp,'autoload/nvim_py2/bin/python'),'\n')[0]
+            if l:python2 != ''
+                let g:python_host_prog = l:python2
+            else
+                echom 'python2 venv not initialized by python-support.nvim. Please execute PythonSupportInitPython2'
+            endif
+        elseif executable('python2') && get(g:,'python_host_prog','') == ''
+            let g:python_host_prog = "python2"
+        elseif g:python_host_prog == ''
+            echom 'python2 executable not found for python_support.vim'
+        endif
 
-	if l:python2 != ''
-		let g:python_host_prog = l:python2
-		" span pyhton process to check requirements 1 second later
-		call timer_start(1000,function('s:py2requirements'))
-	elseif s:python2_require
-		echom 'python2 not provided by python-support.nvim. Please execute PythonSupportInitPython2'
-	endif
+        if get(g:, 'python_host_prog', '') != ''
+            " span pyhton process to check requirements 1 second later
+            call timer_start(1000,function('s:py2requirements'))
+        endif
+    endif
 
-	if l:python3 != ''
-		let g:python3_host_prog = l:python3
-		" span pyhton process to check requirements 1 second later
-		call timer_start(1000,function('s:py3requirements'))
-	elseif s:python3_require
-		echom 'python3 not provided by python-support.nvim. Please execute PythonSupportInitPython3'
-	endif
+    if s:python3_require
+        if g:python_support_python3_venv
+            silent! let l:python3 = split(globpath(&rtp,'autoload/nvim_py3/bin/python'),'\n')[0]
+            if l:python3 != ''
+                let g:python3_host_prog = l:python3
+            else
+                echom 'python3 venv not initialized by python-support.nvim. Please execute PythonSupportInitPython3'
+            endif
+        elseif executable('python3') && get(g:, 'python3_host_prog', '') == ''
+            let g:python3_host_prog = 'python3'
+        elseif g:python3_host_prog == ''
+            echom 'python3 executable not found for python_support.vim'
+        endif
+
+        if get(g:, 'python3_host_prog', '') != ''
+            " span pyhton process to check requirements 1 second later
+            call timer_start(1000,function('s:py3requirements'))
+        endif
+    endif
 
 endfunc
 
@@ -58,7 +82,11 @@ func! s:py2requirements(timer)
 		" no requirements
 		return
 	endif
-	let l:cmd = [g:python_host_prog, split(globpath(&rtp,'autoload/python2_check.py'),'\n')[0]] + g:python_support_python2_requirements
+    let l:python = g:python_host_prog
+    if l:python == ''
+        let l:python = 'python2'
+    endif
+	let l:cmd = [l:python, split(globpath(&rtp,'autoload/python2_check.py'),'\n')[0]] + g:python_support_python2_requirements
 	call jobstart(l:cmd,{'on_stdout':function('s:on_stdout'), 'on_stderr':function('s:on_stdout')})
 endfunc
 
@@ -67,7 +95,11 @@ func! s:py3requirements(timer)
 		" no requirements
 		return
 	endif
-	let l:cmd = [g:python3_host_prog, split(globpath(&rtp,'autoload/python3_check.py'),'\n')[0]] + g:python_support_python3_requirements
+    let l:python = g:python3_host_prog
+    if l:python == ''
+        let l:python = 'python3'
+    endif
+	let l:cmd = [l:python, split(globpath(&rtp,'autoload/python3_check.py'),'\n')[0]] + g:python_support_python3_requirements
 	call jobstart(l:cmd,{'on_stdout':function('s:on_stdout'), 'on_stderr':function('s:on_stdout')})
 endfunc
 
