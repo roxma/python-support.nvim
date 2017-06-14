@@ -22,12 +22,12 @@ func! s:python_support_init(v)
 	split
 	enew
 	if a:v==2
-		call termopen([split(globpath(&rtp,'autoload/python2_support.sh'),'\n')[0]] + [g:python_support_python2_venv] + g:python_support_python2_requirements)
+		let l:cmd = [split(globpath(&rtp,'autoload/python2_support.sh'),'\n')[0]] + [g:python_support_python2_venv] + g:python_support_python2_requirements
 	else
-		call termopen([split(globpath(&rtp,'autoload/python3_support.sh'),'\n')[0]] + [g:python_support_python3_venv] + g:python_support_python3_requirements)
+		let l:cmd = [split(globpath(&rtp,'autoload/python3_support.sh'),'\n')[0]] + [g:python_support_python3_venv] + g:python_support_python3_requirements
 	endif
-	startinsert
-	autocmd termclose  <buffer>  call s:init()
+    exec '! ' . join(l:cmd, ' ')
+    call s:init()
 endfunc
 
 func! s:init()
