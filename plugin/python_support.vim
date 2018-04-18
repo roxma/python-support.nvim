@@ -45,7 +45,7 @@ func! s:init()
             endif
         elseif executable('python2') && get(g:,'python_host_prog','') == ''
             let g:python_host_prog = "python2"
-        elseif g:python_host_prog == ''
+        elseif get(g:, 'python_host_prog', '') == ''
             echom 'python2 executable not found for python_support.vim'
         endif
 
@@ -65,7 +65,7 @@ func! s:init()
             endif
         elseif executable('python3') && get(g:, 'python3_host_prog', '') == ''
             let g:python3_host_prog = 'python3'
-        elseif g:python3_host_prog == ''
+        elseif get(g:, 'python3_host_prog', '') == ''
             echom 'python3 executable not found for python_support.vim'
         endif
 
