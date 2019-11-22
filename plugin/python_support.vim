@@ -10,8 +10,8 @@ let s:python3_require = get(g:,'python_support_python3_require',1)
 let g:python_support_python2_venv = get(g:,'python_support_python2_venv', 1)
 let g:python_support_python3_venv = get(g:,'python_support_python3_venv', 1)
 
-let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'neovim')
-let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'neovim')
+let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'pynvim')
+let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'pynvim')
 " let g:python_support_python3_requirements = add(get(g:,'python_support_python3_requirements',[]),'flake8')
 " let g:python_support_python2_requirements = add(get(g:,'python_support_python2_requirements',[]),'flake8')
 
