@@ -22,7 +22,7 @@ func! s:python_support_init(v)
 	split
 	enew
 	if a:v==2
-		let l:cmd = [split(globpath(&rtp,'autoload/python2_support.sh'),'\n')[0]] + [g:python_host_pro, g:python_support_python2_venv] + g:python_support_python2_requirements
+		let l:cmd = [split(globpath(&rtp,'autoload/python2_support.sh'),'\n')[0]] + [g:python_host_prog, g:python_support_python2_venv] + g:python_support_python2_requirements
 	else
 		let l:cmd = [split(globpath(&rtp,'autoload/python3_support.sh'),'\n')[0]] + [g:python3_host_prog, g:python_support_python3_venv] + g:python_support_python3_requirements
 	endif
